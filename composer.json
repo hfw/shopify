@@ -1,0 +1,25 @@
+{
+  "name": "hfw/shopify",
+  "description": "A fluent library for Shopify's REST API.",
+  "license": "MIT",
+  "keywords": [
+    "shopify"
+  ],
+  "autoload": {
+    "psr-4": {
+      "Helix\\Shopify\\": "src/"
+    }
+  },
+  "require": {
+    "php": "~7.3",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "psr/log": "^1.1",
+    "objects/data": "^1.0"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.x-dev"
+    }
+  }
+}
