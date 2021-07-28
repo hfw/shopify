@@ -17,19 +17,22 @@ use Helix\Shopify\Customer;
  * @method $this    setCustomMessage    (string $message)
  * @todo checked
  */
-class Invite extends Data {
+class Invite extends Data
+{
 
     /**
      * @var Customer
      */
     protected $customer;
 
-    public function __construct (Customer $customer) {
+    public function __construct(Customer $customer)
+    {
         $this->customer = $customer;
         parent::__construct($customer);
     }
 
-    public function send (): void {
+    public function send(): void
+    {
         $this->api->post("{$this->customer}/send_invite", [
             'customer_invite' => $this->data
         ]);

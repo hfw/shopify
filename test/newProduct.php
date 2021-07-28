@@ -53,7 +53,7 @@ $imageMap = [];
 foreach ($product->getImages() as $image) {
     $imageMap[$image->getAlt()] = $image->getId();
 }
-foreach ($product->getVariants() as $variant){
+foreach ($product->getVariants() as $variant) {
     $variant->setImageId($imageMap[$variant->getSku()]);
 }
 

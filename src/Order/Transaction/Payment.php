@@ -13,6 +13,7 @@ use Helix\Shopify\Base\Data;
  * @method string getCreditCardNumber   ()
  * @method string getCreditCardCompany  ()
  */
-class Payment extends Data {
+class Payment extends Data
+{
 
 }

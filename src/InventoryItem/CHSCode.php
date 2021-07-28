@@ -13,14 +13,16 @@ use Helix\Shopify\Base\Data;
  * @method $this    setCountryCode          (string $code)
  * @method $this    setHarmonizedSystemCode (string $code)
  */
-class CHSCode extends Data {
+class CHSCode extends Data
+{
 
     /**
      * The system code.
      *
      * @return string
      */
-    final public function __toString (): string {
+    final public function __toString(): string
+    {
         return $this->getHarmonizedSystemCode();
     }
 }

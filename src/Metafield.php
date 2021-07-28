@@ -27,7 +27,8 @@ use Helix\Shopify\Base\AbstractEntity\MetafieldTrait;
  *
  * @method $this    setDescription  (string $description)
  */
-class Metafield extends AbstractEntity {
+class Metafield extends AbstractEntity
+{
 
     use CrudTrait;
 
@@ -47,20 +48,24 @@ class Metafield extends AbstractEntity {
      * @param AbstractEntity $container
      * @param array $data
      */
-    public function __construct (AbstractEntity $container, array $data = []) {
+    public function __construct(AbstractEntity $container, array $data = [])
+    {
         $this->container = $container;
         parent::__construct($container, $data);
     }
 
-    final public function __toString (): string {
+    final public function __toString(): string
+    {
         return "metafields/{$this->getId()}";
     }
 
-    protected function _container () {
+    protected function _container()
+    {
         return $this->container;
     }
 
-    protected function _dir (): string {
+    protected function _dir(): string
+    {
         if ($this->container instanceof Shop) {
             return 'metafields';
         }
@@ -70,14 +75,16 @@ class Metafield extends AbstractEntity {
     /**
      * @return AbstractEntity
      */
-    public function getResource () {
+    public function getResource()
+    {
         return $this->container;
     }
 
     /**
      * @return mixed
      */
-    public function getValue () {
+    public function getValue()
+    {
         if ($this->isJson()) {
             return json_decode($this->data['value'] ?? 'null', true, JSON_BIGINT_AS_STRING | JSON_THROW_ON_ERROR);
         }
@@ -87,21 +94,24 @@ class Metafield extends AbstractEntity {
     /**
      * @return bool
      */
-    final public function isInt (): bool {
+    final public function isInt(): bool
+    {
         return $this->getValueType() === self::TYPE_INT;
     }
 
     /**
      * @return bool
      */
-    final public function isJson (): bool {
+    final public function isJson(): bool
+    {
         return $this->getValueType() === self::TYPE_JSON;
     }
 
     /**
      * @return bool
      */
-    final public function isString (): bool {
+    final public function isString(): bool
+    {
         return $this->getValueType() === self::TYPE_STRING;
     }
 
@@ -109,7 +119,8 @@ class Metafield extends AbstractEntity {
      * @param mixed $value
      * @return $this
      */
-    public function setValue ($value) {
+    public function setValue($value)
+    {
         if (is_int($value)) {
             $this->_set('value_type', self::TYPE_INT);
             return $this->_set('value', $value);

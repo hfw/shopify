@@ -30,7 +30,8 @@ use Helix\Shopify\Base\AbstractEntity\ImmutableInterface;
  *
  * @method InventoryLevel[] selectInventoryLevels (callable $filter) `fn( InventoryLevel $level ): bool`
  */
-class Location extends AbstractEntity implements ImmutableInterface {
+class Location extends AbstractEntity implements ImmutableInterface
+{
 
     const TYPE = 'location';
     const DIR = 'locations';
@@ -38,7 +39,8 @@ class Location extends AbstractEntity implements ImmutableInterface {
     /**
      * @return InventoryLevel[]
      */
-    public function getInventoryLevels () {
+    public function getInventoryLevels()
+    {
         $remote = $this->api->get("{$this}/inventory_levels")['inventory_levels'] ?? [];
         return $this->api->factoryAll($this, InventoryLevel::class, $remote);
     }
@@ -49,7 +51,8 @@ class Location extends AbstractEntity implements ImmutableInterface {
      * @param InventoryItem $item
      * @return InventoryLevel
      */
-    public function newInventoryLevel (InventoryItem $item) {
+    public function newInventoryLevel(InventoryItem $item)
+    {
         return $this->api->factory($this, InventoryLevel::class, [
             'location_id' => $this->getId(),
             'inventory_item_id' => $item->getId()

@@ -22,7 +22,8 @@ use Helix\Shopify\Order\Funds;
  * @method string   getTaxAmount    ()
  * @method Funds    getTaxAmountSet ()
  */
-class Adjustment extends Data {
+class Adjustment extends Data
+{
 
     const MAP = [
         'amount_set' => Funds::class,

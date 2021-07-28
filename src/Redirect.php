@@ -16,7 +16,8 @@ use Helix\Shopify\Base\AbstractEntity\CrudTrait;
  * @method $this    setPath     (string $path)
  * @method $this    setTarget   (string $target)
  */
-class Redirect extends AbstractEntity {
+class Redirect extends AbstractEntity
+{
 
     use CrudTrait;
 

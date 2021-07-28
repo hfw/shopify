@@ -29,7 +29,8 @@ use Helix\Shopify\Country;
  * @method $this        setTaxType          (?string $type)
  * @todo checked
  */
-class Province extends AbstractEntity {
+class Province extends AbstractEntity
+{
 
     use UpdateTrait;
 
@@ -41,11 +42,13 @@ class Province extends AbstractEntity {
     const TAX_TYPE_HARMONIZED = 'harmonized';
     const TAX_TYPE_COMPOUNDED = 'compounded';
 
-    protected function _container () {
+    protected function _container()
+    {
         return $this->getCountry();
     }
 
-    public function getCountry () {
+    public function getCountry()
+    {
         return Country::load($this, $this->getCountryId());
     }
 

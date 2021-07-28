@@ -22,6 +22,7 @@ use Helix\Shopify\MarketingEvent;
  * @method $this    setSharesCount      (int $count)
  * @method $this    setViewsCount       (int $count)
  */
-class Engagement extends Data {
+class Engagement extends Data
+{
 
 }

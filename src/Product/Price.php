@@ -12,7 +12,8 @@ use Helix\Shopify\Base\Money;
  * @method $this setCompareAtPrice  (Money $price)
  * @method $this setPrice           (Money $price)
  */
-class Price extends Data {
+class Price extends Data
+{
 
     const MAP = [
         'price' => Money::class,

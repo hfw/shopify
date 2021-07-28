@@ -15,12 +15,14 @@ use Traversable;
  * @method string[] getValues   ()
  * @method $this    setValues   (string[] $values)
  */
-class Option extends Data implements IteratorAggregate {
+class Option extends Data implements IteratorAggregate
+{
 
     /**
      * @return Traversable|string[]
      */
-    public function getIterator () {
+    public function getIterator()
+    {
         yield from $this->_get('values', []);
     }
 }

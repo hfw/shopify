@@ -41,7 +41,8 @@ use Helix\Shopify\Order\Transaction\Payment;
  * @method $this        setTest         (bool $test)        @when new
  * @method $this        setUserId       (string $id)        @when new
  */
-class Transaction extends AbstractEntity {
+class Transaction extends AbstractEntity
+{
 
     use CreateTrait;
 
@@ -58,11 +59,13 @@ class Transaction extends AbstractEntity {
     const KIND_SALE = 'sale';
     const KIND_VOID = 'void';
 
-    protected function _container () {
+    protected function _container()
+    {
         return $this->getOrder();
     }
 
-    public function getOrder () {
+    public function getOrder()
+    {
         return Order::load($this, $this->getOrderId());
     }
 }

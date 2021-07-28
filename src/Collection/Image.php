@@ -21,6 +21,7 @@ use Helix\Shopify\SmartCollection;
  * @method string   getSrc          ()
  * @method $this    setSrc          ()
  */
-class Image extends Data {
+class Image extends Data
+{
 
 }

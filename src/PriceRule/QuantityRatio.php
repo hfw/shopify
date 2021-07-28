@@ -14,6 +14,7 @@ use Helix\Shopify\PriceRule;
  * @method $this    setEntitledQuantity     (int $quantity)
  * @method $this    setPrerequisiteQuantity (int $quantity)
  */
-class QuantityRatio extends Data {
+class QuantityRatio extends Data
+{
 
 }

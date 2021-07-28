@@ -20,7 +20,8 @@ use Helix\Shopify\Customer;
  * @method $this    setQuery        (string $query)
  * @todo checked
  */
-class SavedSearch extends AbstractEntity {
+class SavedSearch extends AbstractEntity
+{
 
     use CrudTrait;
 
@@ -31,7 +32,8 @@ class SavedSearch extends AbstractEntity {
      * @param array $query
      * @return Customer[]
      */
-    public function getCustomers (array $query) {
+    public function getCustomers(array $query)
+    {
         unset($query['fields']);
         return Customer::loadAll($this, "{$this}/customers", $query);
     }

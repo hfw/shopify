@@ -50,7 +50,8 @@ use Helix\Shopify\Product\Variant;
  * @method Option[]     selectOptions   (callable $filter) `fn( Option $option ): bool`
  * @method Variant[]    selectVariants  (callable $filter) `fn( Variant $variant ): bool`
  */
-class Product extends AbstractEntity {
+class Product extends AbstractEntity
+{
 
     use CrudTrait;
     use MetafieldTrait;
@@ -68,7 +69,8 @@ class Product extends AbstractEntity {
     /**
      * @return Image
      */
-    public function newImage () {
+    public function newImage()
+    {
         return $this->api->factory($this, Image::class, [
             'product_id' => $this->getId()
         ]);
@@ -77,7 +79,8 @@ class Product extends AbstractEntity {
     /**
      * @return Option
      */
-    public function newOption () {
+    public function newOption()
+    {
         return $this->api->factory($this, Option::class, [
             'product_id' => $this->getId()
         ]);
@@ -86,7 +89,8 @@ class Product extends AbstractEntity {
     /**
      * @return Variant
      */
-    public function newVariant () {
+    public function newVariant()
+    {
         return $this->api->factory($this, Variant::class, [
             'product_id' => $this->getId()
         ]);

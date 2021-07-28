@@ -43,7 +43,8 @@ use Helix\Shopify\Blog\Article\Image;
  *
  * @method Comment[]    selectComments      (callable $filter) `fn( Comment $comment ): bool`
  */
-class Article extends AbstractEntity {
+class Article extends AbstractEntity
+{
 
     use CrudTrait;
     use MetafieldTrait;
@@ -55,21 +56,24 @@ class Article extends AbstractEntity {
         'image' => Data::class
     ];
 
-    protected function _container () {
+    protected function _container()
+    {
         return $this->getBlog();
     }
 
     /**
      * @return Blog
      */
-    public function getBlog () {
+    public function getBlog()
+    {
         return Blog::load($this, $this->getBlogId());
     }
 
     /**
      * @return Comment[]
      */
-    public function getComments () {
+    public function getComments()
+    {
         assert($this->hasId());
         return Comment::loadAll($this, 'comments', [
             'blog_id' => $this->getBlogId(),
@@ -80,7 +84,8 @@ class Article extends AbstractEntity {
     /**
      * @return int
      */
-    public function getCommentsCount (): int {
+    public function getCommentsCount(): int
+    {
         assert($this->hasId());
         return $this->api->get("comments/count", [
             'blog_id' => $this->getBlogId(),
@@ -93,7 +98,8 @@ class Article extends AbstractEntity {
      *
      * @return Comment
      */
-    public function newComment () {
+    public function newComment()
+    {
         assert($this->hasId());
         return $this->api->factory($this, Comment::class, [
             'blog_id' => $this->getBlogId(),

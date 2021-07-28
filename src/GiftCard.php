@@ -46,7 +46,8 @@ use Helix\Shopify\Base\AbstractEntity\UpdateTrait;
  * @method $this setUpdatedAt       (string $iso8601)
  * @method $this setUserId          (string $id)
  */
-class GiftCard extends AbstractEntity {
+class GiftCard extends AbstractEntity
+{
 
     use CreateTrait;
     use UpdateTrait;
@@ -60,21 +61,24 @@ class GiftCard extends AbstractEntity {
     /**
      * @return Customer
      */
-    public function getCustomer () {
+    public function getCustomer()
+    {
         return Customer::load($this, $this->getCustomerId());
     }
 
     /**
      * @return Order
      */
-    public function getOrder () {
+    public function getOrder()
+    {
         return Order::load($this, $this->getOrderId());
     }
 
     /**
      * @return User
      */
-    public function getUser () {
+    public function getUser()
+    {
         return User::load($this, $this->getUserId());
     }
 

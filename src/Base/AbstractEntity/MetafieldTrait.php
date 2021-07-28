@@ -12,19 +12,22 @@ use Helix\Shopify\Metafield;
  *
  * @mixin AbstractEntity
  */
-trait MetafieldTrait {
+trait MetafieldTrait
+{
 
     /**
      * @return string
      */
-    protected function _metafieldType (): string {
+    protected function _metafieldType(): string
+    {
         return static::TYPE;
     }
 
     /**
      * @return Metafield[]
      */
-    public function getMetafields () {
+    public function getMetafields()
+    {
         assert($this->hasId());
         // the endpoints are all over the place.
         // querying the main directory works for all entities.
@@ -42,7 +45,8 @@ trait MetafieldTrait {
      *
      * @return Metafield
      */
-    public function newMetafield () {
+    public function newMetafield()
+    {
         assert($this->hasId());
         /** @var AbstractEntity $that */
         $that = $this;

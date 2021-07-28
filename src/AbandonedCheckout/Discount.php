@@ -15,7 +15,8 @@ use Helix\Shopify\Base\Data;
  * @method string   getUpdatedAt        () ISO8601
  * @method string   getUsageCount       ()
  */
-class Discount extends Data {
+class Discount extends Data
+{
 
     const TYPE_FIXED_AMOUNT = 'fixed_amount';
     const TYPE_PERCENTAGE = 'percentage';

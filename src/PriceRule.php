@@ -67,7 +67,8 @@ use Helix\Shopify\PriceRule\QuantityRatio;
  * @method $this        setValue                        (int $value) negative
  * @method $this        setValueType                    (string $type)
  */
-class PriceRule extends AbstractEntity {
+class PriceRule extends AbstractEntity
+{
 
     const TYPE = 'price_rule';
     const DIR = 'price_rules';
@@ -94,35 +95,40 @@ class PriceRule extends AbstractEntity {
     /**
      * @return DiscountCode[]
      */
-    public function getDiscountCodes () {
+    public function getDiscountCodes()
+    {
         return DiscountCode::loadAll($this, "{$this}/discount_codes");
     }
 
     /**
      * @return null|number
      */
-    public function getMaxShipping () {
+    public function getMaxShipping()
+    {
         return $this->data['prerequisite_shipping_price_range']['less_than_or_equal_to'] ?? null;
     }
 
     /**
      * @return null|int
      */
-    public function getMinQuantity () {
+    public function getMinQuantity()
+    {
         return $this->data['prerequisite_quantity_range']['greater_than_or_equal_to'] ?? null;
     }
 
     /**
      * @return null|number
      */
-    public function getMinSubtotal () {
+    public function getMinSubtotal()
+    {
         return $this->data['prerequisite_subtotal_range']['greater_than_or_equal_to'] ?? null;
     }
 
     /**
      * @return DiscountCode
      */
-    public function newDiscountCode () {
+    public function newDiscountCode()
+    {
         return $this->api->factory($this, DiscountCode::class, [
             'price_rule_id' => $this->getId()
         ]);
@@ -132,7 +138,8 @@ class PriceRule extends AbstractEntity {
      * @param null|number $max
      * @return $this
      */
-    public function setMaxShipping ($max) {
+    public function setMaxShipping($max)
+    {
         return $this->_set('prerequisite_shipping_price_range', isset($max) ? ['less_than_or_equal_to' => $max] : null);
     }
 
@@ -140,7 +147,8 @@ class PriceRule extends AbstractEntity {
      * @param null|int $min
      * @return $this
      */
-    public function setMinQuantity (?int $min) {
+    public function setMinQuantity(?int $min)
+    {
         return $this->_set('prerequisite_quantity_range', isset($min) ? ['greater_than_or_equal_to' => $min] : null);
     }
 
@@ -148,7 +156,8 @@ class PriceRule extends AbstractEntity {
      * @param null|number $min
      * @return $this
      */
-    public function setMinSubtotal ($min) {
+    public function setMinSubtotal($min)
+    {
         return $this->_set('prerequisite_subtotal_range', isset($min) ? ['greater_than_or_equal_to' => $min] : null);
     }
 }

@@ -18,7 +18,8 @@ use Helix\Shopify\Base\AbstractEntity\CrudTrait;
  * @method $this    setShopifyQl    (string $ql)
  * @method string   getUpdatedAt    ()
  */
-class Report extends AbstractEntity {
+class Report extends AbstractEntity
+{
 
     use CrudTrait;
 

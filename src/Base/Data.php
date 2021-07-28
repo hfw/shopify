@@ -12,7 +12,8 @@ use Serializable;
 /**
  * A data-object supporting annotated magic access.
  */
-class Data extends \Base\Data implements JsonSerializable, Serializable {
+class Data extends \Base\Data implements JsonSerializable, Serializable
+{
 
     use MagicMethodTrait;
     use JsonSerializableTrait;
@@ -44,7 +45,8 @@ class Data extends \Base\Data implements JsonSerializable, Serializable {
      * @return Api
      * @internal
      */
-    final protected static function _getApi ($caller) {
+    final protected static function _getApi($caller)
+    {
         if ($caller instanceof self) {
             return $caller->api;
         }
@@ -56,7 +58,8 @@ class Data extends \Base\Data implements JsonSerializable, Serializable {
      * @param Api|Data $caller
      * @param array $data
      */
-    public function __construct ($caller, array $data = []) {
+    public function __construct($caller, array $data = [])
+    {
         parent::__construct();
         $this->api = self::_getApi($caller);
         $this->pool = $this->api->getPool();
@@ -68,13 +71,14 @@ class Data extends \Base\Data implements JsonSerializable, Serializable {
      * @param array $args
      * @return mixed
      */
-    public function __call (string $method, array $args) {
+    public function __call(string $method, array $args)
+    {
         static $magic = [];
         if (!$call =& $magic[$method]) {
             preg_match('/^([a-z]+)(.+)$/', $method, $call);
             $call[1] = '_' . $call[1];
             if ($call[1] !== '_select') { // _select() calls getters
-                $call[2] = preg_replace_callback('/[A-Z]/', function(array $match) {
+                $call[2] = preg_replace_callback('/[A-Z]/', function (array $match) {
                     return '_' . lcfirst($match[0]);
                 }, lcfirst($call[2]));
             }
@@ -89,7 +93,8 @@ class Data extends \Base\Data implements JsonSerializable, Serializable {
      * @param mixed $item
      * @return mixed
      */
-    protected function _hydrate (string $class, $item) {
+    protected function _hydrate(string $class, $item)
+    {
         if (!isset($item) or $item instanceof self) {
             return $item;
         }
@@ -98,7 +103,7 @@ class Data extends \Base\Data implements JsonSerializable, Serializable {
             if (is_string($item)) { // convert ids to lazy stubs
                 $item = ['id' => $item];
             }
-            return $this->pool->get($item['id'], $this, function() use ($class, $item) {
+            return $this->pool->get($item['id'], $this, function () use ($class, $item) {
                 return $this->api->factory($this, $class, $item);
             });
         }
@@ -120,7 +125,8 @@ class Data extends \Base\Data implements JsonSerializable, Serializable {
      * @param array $args
      * @return array
      */
-    protected function _select ($subject, callable $filter, ...$args) {
+    protected function _select($subject, callable $filter, ...$args)
+    {
         if (is_string($subject)) {
             $subject = $this->{'get' . $subject}(...$args) ?? [];
         }
@@ -139,7 +145,8 @@ class Data extends \Base\Data implements JsonSerializable, Serializable {
      * @param array $data
      * @return $this
      */
-    protected function _setData (array $data) {
+    protected function _setData(array $data)
+    {
         $this->data = $this->diff = [];
         foreach ($data as $field => $value) {
             $this->_setField($field, $value);
@@ -154,15 +161,15 @@ class Data extends \Base\Data implements JsonSerializable, Serializable {
      * @param mixed $value
      * @return $this
      */
-    protected function _setField (string $field, $value) {
+    protected function _setField(string $field, $value)
+    {
         if (isset(static::MAP[$field])) {
             $class = static::MAP[$field];
             if (is_array($class)) {
-                $value = array_map(function($each) use ($class) {
+                $value = array_map(function ($each) use ($class) {
                     return $this->_hydrate($class[0], $each);
                 }, $value);
-            }
-            elseif (isset($value)) {
+            } elseif (isset($value)) {
                 $value = $this->_hydrate($class, $value);
             }
         }
@@ -176,15 +183,17 @@ class Data extends \Base\Data implements JsonSerializable, Serializable {
      *
      * @return string
      */
-    public function serialize (): string {
+    public function serialize(): string
+    {
         return json_encode($this, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
 
     /**
      * @return array
      */
-    public function toArray (): array {
-        return array_map(function($value) {
+    public function toArray(): array
+    {
+        return array_map(function ($value) {
             if ($value instanceof self) {
                 return $value->toArray();
             }
@@ -195,7 +204,8 @@ class Data extends \Base\Data implements JsonSerializable, Serializable {
     /**
      * @param $serialized
      */
-    public function unserialize ($serialized): void {
+    public function unserialize($serialized): void
+    {
         $this->data = json_decode($serialized, true);
     }
 }

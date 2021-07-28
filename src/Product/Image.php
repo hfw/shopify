@@ -32,7 +32,8 @@ use Helix\Shopify\Product;
  * @method $this setVariantIds  (string[] $ids)
  * @method $this setWidth       (int $width)
  */
-class Image extends AbstractEntity {
+class Image extends AbstractEntity
+{
 
     use CrudTrait;
     use MetafieldTrait;
@@ -40,15 +41,18 @@ class Image extends AbstractEntity {
     const TYPE = 'image';
     const DIR = 'images';
 
-    protected function _container () {
+    protected function _container()
+    {
         return $this->getProduct();
     }
 
-    final protected function _metafieldType (): string {
+    final protected function _metafieldType(): string
+    {
         return 'product_image';
     }
 
-    public function getProduct () {
+    public function getProduct()
+    {
         return Product::load($this, $this->getProductId());
     }
 

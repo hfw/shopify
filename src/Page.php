@@ -29,7 +29,8 @@ use Helix\Shopify\Base\AbstractEntity\MetafieldTrait;
  * @method $this setTemplateSuffix  (string $suffix)
  * @method $this setTitle           (string $title)
  */
-class Page extends AbstractEntity {
+class Page extends AbstractEntity
+{
 
     use CrudTrait;
     use MetafieldTrait;

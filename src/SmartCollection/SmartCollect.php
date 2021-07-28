@@ -13,12 +13,14 @@ use Helix\Shopify\SmartCollection;
  *
  * @see SmartCollection::newCollect()
  */
-class SmartCollect extends AbstractCollect {
+class SmartCollect extends AbstractCollect
+{
 
     /**
      * @return SmartCollection
      */
-    public function getCollection () {
+    public function getCollection()
+    {
         return SmartCollection::load($this, $this->getCollectionId());
     }
 }

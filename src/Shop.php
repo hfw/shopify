@@ -64,7 +64,8 @@ use LogicException;
  * @method string   getWeightUnit                   ()
  * @method string   getZip                          ()
  */
-class Shop extends AbstractEntity implements ImmutableInterface {
+class Shop extends AbstractEntity implements ImmutableInterface
+{
 
     use MetafieldTrait;
 
@@ -78,7 +79,8 @@ class Shop extends AbstractEntity implements ImmutableInterface {
      * @param array $query ignored
      * @internal Use {@link Api::getShop()} instead.
      */
-    final public static function load ($caller, string $id, array $query = []) {
+    final public static function load($caller, string $id, array $query = [])
+    {
         throw new LogicException;
     }
 
@@ -88,14 +90,16 @@ class Shop extends AbstractEntity implements ImmutableInterface {
      * @param array $query ignored
      * @internal Use {@link Api::getShop()} instead.
      */
-    final public static function loadAll ($caller, string $path, array $query = []) {
+    final public static function loadAll($caller, string $path, array $query = [])
+    {
         throw new LogicException;
     }
 
     /**
      * @return string
      */
-    final public function __toString (): string {
+    final public function __toString(): string
+    {
         return 'shop';
     }
 
@@ -103,7 +107,8 @@ class Shop extends AbstractEntity implements ImmutableInterface {
      * @param array $query
      * @return AbandonedCheckout[]
      */
-    public function getAbandonedCheckouts (array $query = []) {
+    public function getAbandonedCheckouts(array $query = [])
+    {
         $checkouts = $this->api->get('checkouts', $query)['checkouts'] ?? [];
         return $this->api->factoryAll($this, AbandonedCheckout::class, $checkouts);
     }
@@ -111,7 +116,8 @@ class Shop extends AbstractEntity implements ImmutableInterface {
     /**
      * @return int
      */
-    public function getAbandonedCheckoutsCount (): int {
+    public function getAbandonedCheckoutsCount(): int
+    {
         return $this->api->get('checkouts/count')['count'];
     }
 
@@ -119,7 +125,8 @@ class Shop extends AbstractEntity implements ImmutableInterface {
      * @param string $code
      * @return Country
      */
-    public function newCountry (string $code) {
+    public function newCountry(string $code)
+    {
         return $this->api->factory($this, Country::class, [
             'code' => $code
         ]);
@@ -128,7 +135,8 @@ class Shop extends AbstractEntity implements ImmutableInterface {
     /**
      * @return Customer
      */
-    public function newCustomer () {
+    public function newCustomer()
+    {
         return $this->api->factory($this, Customer::class);
     }
 }

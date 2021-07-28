@@ -31,32 +31,37 @@ use Helix\Shopify\Blog\Article;
  * @method $this    setEmail        (string $email)
  * @method $this    setIp           (string $ip)
  */
-class Comment extends AbstractEntity {
+class Comment extends AbstractEntity
+{
 
     use CrudTrait;
 
     const TYPE = 'comment';
     const DIR = 'comments';
 
-    protected function _container () {
+    protected function _container()
+    {
         return $this->getArticle();
     }
 
-    protected function _dir (): string {
+    protected function _dir(): string
+    {
         return 'comments';
     }
 
     /**
      * @return Article
      */
-    public function getArticle () {
+    public function getArticle()
+    {
         return Article::load($this, $this->getArticleId());
     }
 
     /**
      * @return Blog
      */
-    public function getBlog () {
+    public function getBlog()
+    {
         return Blog::load($this, $this->getBlogId());
     }
 }

@@ -28,7 +28,8 @@ use Helix\Shopify\Order\OrderItem as OrderItem;
  * @method number           getTotalTax         ()
  * @method Funds            getTotalTaxSet      ()
  */
-class RefundItem extends Data {
+class RefundItem extends Data
+{
 
     const RESTOCK_CANCEL = 'cancel';
     const RESTOCK_LEGACY = 'legacy_restock'; // unusable

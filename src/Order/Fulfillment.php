@@ -32,7 +32,8 @@ use Helix\Shopify\Order\Fulfillment\Receipt;
  * @method string       getUpdatedAt                    ()
  * @method string       getVariantInventoryManagement   ()
  */
-class Fulfillment extends AbstractEntity {
+class Fulfillment extends AbstractEntity
+{
 
     use CreateTrait;
 
@@ -61,14 +62,16 @@ class Fulfillment extends AbstractEntity {
     const SHIPMENT_COMPLETE = 'delivered';
     const SHIPMENT_FAILURE = 'failure';
 
-    protected function _container () {
+    protected function _container()
+    {
         return $this->getOrder();
     }
 
     /**
      * @return $this
      */
-    public function cancel () {
+    public function cancel()
+    {
         assert($this->hasId());
         $remote = $this->api->post("{$this}/cancel", []);
         return $this->_setData($remote[self::TYPE]);
@@ -77,7 +80,8 @@ class Fulfillment extends AbstractEntity {
     /**
      * @return $this
      */
-    public function complete () {
+    public function complete()
+    {
         assert($this->hasId());
         $remote = $this->api->post("{$this}/complete", []);
         return $this->_setData($remote[self::TYPE]);
@@ -86,7 +90,8 @@ class Fulfillment extends AbstractEntity {
     /**
      * @return Order
      */
-    public function getOrder () {
+    public function getOrder()
+    {
         return Order::load($this, $this->getOrderId());
     }
 
@@ -94,7 +99,8 @@ class Fulfillment extends AbstractEntity {
      * @param string $orderItemId
      * @return OrderItem
      */
-    public function newItem (string $orderItemId) {
+    public function newItem(string $orderItemId)
+    {
         return $this->api->factory($this, OrderItem::class, [
             'id' => $orderItemId
         ]);
@@ -103,7 +109,8 @@ class Fulfillment extends AbstractEntity {
     /**
      * @return $this
      */
-    public function open () {
+    public function open()
+    {
         assert($this->hasId());
         $remote = $this->api->post("{$this}/open", []);
         return $this->_setData($remote[self::TYPE]);

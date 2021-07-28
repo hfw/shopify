@@ -26,7 +26,8 @@ use Helix\Shopify\Blog\Article;
  * @method $this    setTags                 (string $csv)
  * @method $this    setTitle                (string $title)
  */
-class Blog extends AbstractEntity {
+class Blog extends AbstractEntity
+{
 
     use CrudTrait;
     use MetafieldTrait;
@@ -43,7 +44,8 @@ class Blog extends AbstractEntity {
      *
      * @return Article
      */
-    public function newArticle () {
+    public function newArticle()
+    {
         assert($this->hasId());
         return $this->api->factory($this, Article::class, [
             'blog_id' => $this->getId()

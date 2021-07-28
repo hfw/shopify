@@ -31,7 +31,8 @@ use Helix\Shopify\Base\AbstractEntity\UpdateTrait;
  * @method $this setSrc         (string $src)
  * @method $this setValue       (string $value)
  */
-class Asset extends AbstractEntity {
+class Asset extends AbstractEntity
+{
 
     use UpdateTrait;
     use DeleteTrait;

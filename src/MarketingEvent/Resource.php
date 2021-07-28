@@ -14,7 +14,8 @@ use Helix\Shopify\MarketingEvent;
  * @method $this    setId   (string $id) Not needed if `type` is `homepage`.
  * @method $this    setType (string $type) See the type constants.
  */
-class Resource extends Data {
+class Resource extends Data
+{
 
     const TYPE_ARTICLE = 'article';
     const TYPE_COLLECTION = 'collection';

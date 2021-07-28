@@ -13,6 +13,7 @@ use Helix\Shopify\Base\Data;
  * @method $this setSubject         (string $subject)
  * @method $this setCustomMessage   (string $message)
  */
-class Invoice extends Data {
+class Invoice extends Data
+{
 
 }

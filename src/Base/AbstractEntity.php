@@ -9,7 +9,8 @@ use RuntimeException;
  * An entity with an ID that can be saved, updated, and deleted.
  *
  */
-abstract class AbstractEntity extends Data {
+abstract class AbstractEntity extends Data
+{
 
     /**
      * All subclasses must redeclare this to match their types.
@@ -31,7 +32,8 @@ abstract class AbstractEntity extends Data {
      * @param array $query
      * @return null|static
      */
-    public static function load ($caller, string $id, array $query = []) {
+    public static function load($caller, string $id, array $query = [])
+    {
         return self::_getApi($caller)->load($caller, static::class, self::DIR . '/' . $id, $query);
     }
 
@@ -41,7 +43,8 @@ abstract class AbstractEntity extends Data {
      * @param array $query
      * @return static[]
      */
-    public static function loadAll ($caller, string $path, array $query = []) {
+    public static function loadAll($caller, string $path, array $query = [])
+    {
         return self::_getApi($caller)->loadAll($caller, static::class, $path, $query);
     }
 
@@ -50,14 +53,16 @@ abstract class AbstractEntity extends Data {
      * @return bool
      * @internal pool
      */
-    final public function __merge (self $entity): bool {
+    final public function __merge(self $entity): bool
+    {
         return false; // todo
     }
 
     /**
      * @return string
      */
-    public function __toString (): string {
+    public function __toString(): string
+    {
         $path = static::DIR . '/' . $this->getId();
         if ($container = $this->_container()) {
             return "{$container}/{$path}";
@@ -70,7 +75,8 @@ abstract class AbstractEntity extends Data {
      *
      * @return null|AbstractEntity
      */
-    protected function _container () {
+    protected function _container()
+    {
         return null;
     }
 
@@ -80,25 +86,29 @@ abstract class AbstractEntity extends Data {
      * @param string $field
      * @return mixed
      */
-    protected function _get (string $field) {
+    protected function _get(string $field)
+    {
         if (!array_key_exists($field, $this->data) and $this->hasId()) {
             $this->_reload($field);
         }
         return parent::_get($field);
     }
 
-    protected function _onDelete (): void {
+    protected function _onDelete(): void
+    {
         $this->pool->remove(...$this->getPoolKeys());
     }
 
-    protected function _onSave (): void {
+    protected function _onSave(): void
+    {
         $this->pool->add($this);
     }
 
     /**
      * @param string $field
      */
-    protected function _reload (string $field): void {
+    protected function _reload(string $field): void
+    {
         assert($this->hasId());
         $remote = $this->api->get($this, ['fields' => $field]);
         $this->_setField($field, $remote[static::TYPE][$field]);
@@ -108,21 +118,24 @@ abstract class AbstractEntity extends Data {
     /**
      * @return null|string
      */
-    final public function getId (): ?string {
+    final public function getId(): ?string
+    {
         return $this->data['id'] ?? null;
     }
 
     /**
      * @return string[]
      */
-    public function getPoolKeys () {
+    public function getPoolKeys()
+    {
         return [$this->getId(), (string)$this];
     }
 
     /**
      * @return bool
      */
-    final public function hasId (): bool {
+    final public function hasId(): bool
+    {
         return isset($this->data['id']);
     }
 
@@ -131,7 +144,8 @@ abstract class AbstractEntity extends Data {
      *
      * @return $this
      */
-    public function reload () {
+    public function reload()
+    {
         assert($this->hasId());
         $remote = $this->api->get($this);
         if (!isset($remote[static::TYPE]['id'])) { // deleted?

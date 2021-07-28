@@ -13,6 +13,7 @@ use Helix\Shopify\Base\Data;
  * @method $this    setCondition    (string $condition)
  * @method $this    setRelation     (string $relation)
  */
-class Rule extends Data {
+class Rule extends Data
+{
 
 }

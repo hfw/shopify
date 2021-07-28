@@ -12,6 +12,7 @@ use Helix\Shopify\Base\Data;
  * @method string isTestcase        ()
  * @method string getAuthorization  ()
  */
-class Receipt extends Data {
+class Receipt extends Data
+{
 
 }

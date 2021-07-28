@@ -22,7 +22,8 @@ use Helix\Shopify\SmartCollection\SmartCollect;
  * @method $this    setPublishedScope               (string $scope) `web|global`
  * @method $this    setRules                        (Rule[] $rules)
  */
-class SmartCollection extends AbstractCollection {
+class SmartCollection extends AbstractCollection
+{
 
     const TYPE = 'smart_collection';
     const DIR = 'smart_collections';
@@ -36,7 +37,8 @@ class SmartCollection extends AbstractCollection {
      * @param Product $product
      * @return SmartCollect
      */
-    public function newCollect (Product $product) {
+    public function newCollect(Product $product)
+    {
         return $this->api->factory($this, SmartCollect::class, [
             'collection_id' => $this->getId(),
             'product_id' => $product->getId()
@@ -46,7 +48,8 @@ class SmartCollection extends AbstractCollection {
     /**
      * @return Rule
      */
-    public function newRule () {
+    public function newRule()
+    {
         return $this->api->factory($this, Rule::class);
     }
 }

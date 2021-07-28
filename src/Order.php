@@ -118,7 +118,8 @@ use Helix\Shopify\Order\Tax;
  * @method $this setPhone                   (string $phone)
  * @method $this setReferringSite           (string $site)
  */
-class Order extends AbstractOrder {
+class Order extends AbstractOrder
+{
 
     use CrudTrait;
 
@@ -175,7 +176,8 @@ class Order extends AbstractOrder {
      *
      * @return $this
      */
-    public function cancel () {
+    public function cancel()
+    {
         assert($this->hasId());
         $this->api->post("{$this}/cancel");
         return $this->reload();
@@ -186,7 +188,8 @@ class Order extends AbstractOrder {
      *
      * @return $this
      */
-    public function close () {
+    public function close()
+    {
         assert($this->hasId());
         $this->api->post("{$this}/close");
         return $this->reload();
@@ -195,14 +198,16 @@ class Order extends AbstractOrder {
     /**
      * @return Discount
      */
-    public function newDiscount () {
+    public function newDiscount()
+    {
         return $this->api->factory($this, Discount::class);
     }
 
     /**
      * @return Fulfillment
      */
-    public function newFulfillment () {
+    public function newFulfillment()
+    {
         assert($this->hasId());
         return $this->api->factory($this, Fulfillment::class, [
             'order_id' => $this->getId()
@@ -212,7 +217,8 @@ class Order extends AbstractOrder {
     /**
      * @return Refund
      */
-    public function newRefund () {
+    public function newRefund()
+    {
         assert($this->hasId());
         return $this->api->factory($this, Refund::class);
     }
@@ -220,7 +226,8 @@ class Order extends AbstractOrder {
     /**
      * @return Shipping
      */
-    public function newShipping () {
+    public function newShipping()
+    {
         return $this->api->factory($this, Shipping::class);
     }
 
@@ -229,7 +236,8 @@ class Order extends AbstractOrder {
      *
      * @return $this
      */
-    public function reopen () {
+    public function reopen()
+    {
         assert($this->hasId());
         $this->api->post("{$this}/open");
         return $this->reload();

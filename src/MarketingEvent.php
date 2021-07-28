@@ -50,7 +50,8 @@ use Helix\Shopify\MarketingEvent\Resource;
  * @method $this        setUtmMedium            (string $medium)
  * @method $this        setUtmSource            (string $source)
  */
-class MarketingEvent extends AbstractEntity {
+class MarketingEvent extends AbstractEntity
+{
 
     use CrudTrait;
 
@@ -85,7 +86,8 @@ class MarketingEvent extends AbstractEntity {
      *
      * @return mixed
      */
-    public function newEngagement () {
+    public function newEngagement()
+    {
         return $this->api->factory($this, Engagement::class);
     }
 
@@ -94,7 +96,8 @@ class MarketingEvent extends AbstractEntity {
      *
      * @return Resource
      */
-    public function newResource () {
+    public function newResource()
+    {
         return $this->api->factory($this, Resource::class);
     }
 
@@ -102,7 +105,8 @@ class MarketingEvent extends AbstractEntity {
      * @param Engagement[] $engagements
      * @return $this
      */
-    public function sendEngagements (array $engagements) {
+    public function sendEngagements(array $engagements)
+    {
         $this->api->post("{$this}/engagements", [
             'engagements' => $engagements
         ]);

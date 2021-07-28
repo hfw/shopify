@@ -13,7 +13,8 @@ use Helix\Shopify\CustomCollection\CustomCollect;
  * @method bool     isPublished     ()
  * @method $this    setPublished    (bool $published)
  */
-class CustomCollection extends AbstractCollection {
+class CustomCollection extends AbstractCollection
+{
 
     const TYPE = 'custom_collection';
     const DIR = 'custom_collections';
@@ -22,7 +23,8 @@ class CustomCollection extends AbstractCollection {
      * @param Product $product
      * @return CustomCollect
      */
-    public function newCollect (Product $product) {
+    public function newCollect(Product $product)
+    {
         return $this->api->factory($this, CustomCollect::class, [
             'collection_id' => $this->getId(),
             'product_id' => $product->getId()

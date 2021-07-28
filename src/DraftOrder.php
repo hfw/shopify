@@ -30,7 +30,8 @@ use Helix\Shopify\Order\Shipping;
  * @method $this setTaxExempt   (bool $exempt)
  * @method $this setLineItems   (OrderItem[] $items)
  */
-class DraftOrder extends AbstractOrder {
+class DraftOrder extends AbstractOrder
+{
 
     const TYPE = 'draft_order';
     const DIR = 'draft_orders';
@@ -53,7 +54,8 @@ class DraftOrder extends AbstractOrder {
      * @param bool $paymentPending
      * @return $this
      */
-    public function complete (bool $paymentPending = false) {
+    public function complete(bool $paymentPending = false)
+    {
         assert($this->hasId());
         $remote = $this->api->put("{$this}/complete", [
             'payment_pending' => ['false', 'true'][$paymentPending]
@@ -67,7 +69,8 @@ class DraftOrder extends AbstractOrder {
      * @param Invoice|null $invoice
      * @return $this
      */
-    public function sendInvoice (Invoice $invoice = null) {
+    public function sendInvoice(Invoice $invoice = null)
+    {
         assert($this->hasId());
         $this->api->post("{$this}/send_invoice", [
             'draft_order_invoice' => $invoice ? $invoice->toArray() : (object)[]

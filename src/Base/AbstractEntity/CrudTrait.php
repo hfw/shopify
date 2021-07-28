@@ -7,7 +7,8 @@ use Helix\Shopify\Base\AbstractEntity;
 /**
  * @mixin AbstractEntity
  */
-trait CrudTrait {
+trait CrudTrait
+{
 
     use CreateTrait;
     use DeleteTrait;

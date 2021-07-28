@@ -43,7 +43,8 @@ use Helix\Shopify\Customer;
  * @method $this setTotalPrice      (string $price)
  * @method $this setTotalTax        (string $amount)
  */
-abstract class AbstractOrder extends AbstractEntity {
+abstract class AbstractOrder extends AbstractEntity
+{
 
     use MetafieldTrait;
 

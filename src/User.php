@@ -27,7 +27,8 @@ use Helix\Shopify\Base\AbstractEntity\ImmutableInterface;
  *
  * @method bool hasPermissions  ()
  */
-class User extends AbstractEntity implements ImmutableInterface {
+class User extends AbstractEntity implements ImmutableInterface
+{
 
     const PERM_APPLICATIONS = 'applications';
     const PERM_CUSTOMERS = 'customers';

@@ -15,7 +15,8 @@ use Psr\Log\NullLogger;
  *
  * @see https://shopify.dev/docs/admin-api/rest/reference
  */
-class Api {
+class Api
+{
 
     /**
      * @var string
@@ -48,7 +49,8 @@ class Api {
      * @param string $password
      * @param null|Pool $pool
      */
-    public function __construct (string $domain, string $key, string $password, Pool $pool = null) {
+    public function __construct(string $domain, string $key, string $password, Pool $pool = null)
+    {
         $this->domain = $domain;
         $this->key = $key;
         $this->password = $password;
@@ -60,7 +62,8 @@ class Api {
      * @param array $query
      * @return Generator|mixed|AbstractEntity[]
      */
-    public function advancedSearch (string $class, array $query) {
+    public function advancedSearch(string $class, array $query)
+    {
         $continue = !isset($query['limit']);
         $query['limit'] += ['limit' => 250];
         do {
@@ -76,7 +79,8 @@ class Api {
      * @param string $path
      * @param array $query
      */
-    public function delete (string $path, array $query = []): void {
+    public function delete(string $path, array $query = []): void
+    {
         $path .= '.json';
         if ($query) {
             $path .= '?' . http_build_query($query);
@@ -90,7 +94,8 @@ class Api {
      * @param array $curlOpts
      * @return null|array
      */
-    public function exec (string $method, string $path, array $curlOpts = []) {
+    public function exec(string $method, string $path, array $curlOpts = [])
+    {
         $this->getLogger()->log(LOG_DEBUG, "{$method} {$path}", $curlOpts);
         $ch = curl_init();
         curl_setopt_array($ch, [
@@ -134,7 +139,8 @@ class Api {
      * @param array $data
      * @return mixed
      */
-    public function factory ($caller, string $class, array $data = []) {
+    public function factory($caller, string $class, array $data = [])
+    {
         return new $class($caller, $data);
     }
 
@@ -144,8 +150,9 @@ class Api {
      * @param array[] $list
      * @return array
      */
-    public function factoryAll ($caller, string $class, array $list) {
-        return array_map(function(array $each) use ($caller, $class) {
+    public function factoryAll($caller, string $class, array $list)
+    {
+        return array_map(function (array $each) use ($caller, $class) {
             return $this->factory($caller, $class, $each);
         }, $list);
     }
@@ -155,7 +162,8 @@ class Api {
      * @param array $query
      * @return null|array
      */
-    public function get (string $path, array $query = []) {
+    public function get(string $path, array $query = [])
+    {
         $path .= '.json';
         if ($query) {
             $path .= '?' . http_build_query($query);
@@ -167,35 +175,40 @@ class Api {
      * @param string $id
      * @return null|Location
      */
-    public function getLocation (string $id) {
+    public function getLocation(string $id)
+    {
         return $this->load($this, Location::class, "locations/{$id}");
     }
 
     /**
      * @return LoggerInterface
      */
-    public function getLogger (): LoggerInterface {
+    public function getLogger(): LoggerInterface
+    {
         return $this->logger ?? $this->logger = new NullLogger();
     }
 
     /**
      * @return User
      */
-    public function getMe () {
+    public function getMe()
+    {
         return $this->load($this, User::class, 'users/current');
     }
 
     /**
      * @return Pool
      */
-    public function getPool () {
+    public function getPool()
+    {
         return $this->pool;
     }
 
     /**
      * @return Shop
      */
-    public function getShop () {
+    public function getShop()
+    {
         return $this->load($this, Shop::class, 'shop');
     }
 
@@ -206,8 +219,9 @@ class Api {
      * @param array $query
      * @return null|mixed|AbstractEntity
      */
-    public function load ($caller, string $class, string $path, array $query = []) {
-        return $this->pool->get($path, $caller, function($caller) use ($class, $path, $query) {
+    public function load($caller, string $class, string $path, array $query = [])
+    {
+        return $this->pool->get($path, $caller, function ($caller) use ($class, $path, $query) {
             if ($remote = $this->get($path, $query)) {
                 return $this->factory($caller, $class, $remote[$class::TYPE]);
             }
@@ -222,9 +236,10 @@ class Api {
      * @param array $query
      * @return array|Data[]
      */
-    public function loadAll ($caller, string $class, string $path, array $query = []) {
-        return array_map(function(array $each) use ($caller, $class) {
-            return $this->pool->get($each['id'], $caller, function($caller) use ($class, $each) {
+    public function loadAll($caller, string $class, string $path, array $query = [])
+    {
+        return array_map(function (array $each) use ($caller, $class) {
+            return $this->pool->get($each['id'], $caller, function ($caller) use ($class, $each) {
                 return $this->factory($caller, $class, $each);
             });
         }, $this->get($path, $query)[$class::DIR] ?? []);
@@ -235,7 +250,8 @@ class Api {
      * @param array $data
      * @return null|array
      */
-    public function post (string $path, array $data = []) {
+    public function post(string $path, array $data = [])
+    {
         return $this->exec('POST', "{$path}.json", [
             CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
             CURLOPT_POSTFIELDS => json_encode($data, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR)
@@ -247,7 +263,8 @@ class Api {
      * @param array $data
      * @return null|array
      */
-    public function put (string $path, array $data = []) {
+    public function put(string $path, array $data = [])
+    {
         return $this->exec('PUT', "{$path}.json", [
             CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
             CURLOPT_POSTFIELDS => json_encode($data, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR)
@@ -258,7 +275,8 @@ class Api {
      * @param LoggerInterface $logger
      * @return $this
      */
-    final public function setLogger (LoggerInterface $logger) {
+    final public function setLogger(LoggerInterface $logger)
+    {
         $this->logger = $logger;
         return $this;
     }

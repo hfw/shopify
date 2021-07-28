@@ -16,13 +16,15 @@ use Helix\Shopify\Base\Data;
  * @method string   getLocationId           () injected
  * @method string   getUpdatedAt            ()
  */
-class InventoryLevel extends Data {
+class InventoryLevel extends Data
+{
 
     /**
      * @param int $qty +/-
      * @return $this
      */
-    public function adjustAvailable (int $qty) {
+    public function adjustAvailable(int $qty)
+    {
         $remote = $this->api->post('inventory_levels', [
             'inventory_item_id' => $this->getInventoryItemId(),
             'location_id' => $this->getLocationId(),
@@ -35,7 +37,8 @@ class InventoryLevel extends Data {
      * @param bool $relocate
      * @return $this
      */
-    public function connect (bool $relocate = false) {
+    public function connect(bool $relocate = false)
+    {
         $remote = $this->api->post('inventory_levels/connect', [
             'inventory_item_id' => $this->getInventoryItemId(),
             'location_id' => $this->getLocationId(),
@@ -44,7 +47,8 @@ class InventoryLevel extends Data {
         return $this->_setData($remote['inventory_level']);
     }
 
-    public function disconnect (): void {
+    public function disconnect(): void
+    {
         $this->api->delete('inventory_levels', [
             'inventory_item_id' => $this->getInventoryItemId(),
             'location_id' => $this->getLocationId()
@@ -54,14 +58,16 @@ class InventoryLevel extends Data {
     /**
      * @return InventoryItem
      */
-    public function getInventoryItem () {
+    public function getInventoryItem()
+    {
         return InventoryItem::load($this, $this->getInventoryItemId());
     }
 
     /**
      * @return Location
      */
-    public function getLocation () {
+    public function getLocation()
+    {
         return Location::load($this, $this->getLocationId());
     }
 
@@ -69,7 +75,8 @@ class InventoryLevel extends Data {
      * @param int $qty
      * @return InventoryLevel
      */
-    public function setAvailable (int $qty) {
+    public function setAvailable(int $qty)
+    {
         $remote = $this->api->post('inventory_levels', [
             'inventory_item_id' => $this->getInventoryItemId(),
             'location_id' => $this->getLocationId(),

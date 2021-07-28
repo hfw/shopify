@@ -38,7 +38,8 @@ use Helix\Shopify\Order\Refund\RefundItem;
  * @method bool hasRefundLineItems  ()
  * @method bool hasTransactions     ()
  */
-class Refund extends AbstractEntity implements ImmutableInterface {
+class Refund extends AbstractEntity implements ImmutableInterface
+{
 
     use CreateTrait;
 
@@ -61,33 +62,38 @@ class Refund extends AbstractEntity implements ImmutableInterface {
      */
     protected $order;
 
-    public function __construct (Order $order, array $data = []) {
+    public function __construct(Order $order, array $data = [])
+    {
         $this->order = $order;
         parent::__construct($order, $data);
     }
 
-    protected function _container () {
+    protected function _container()
+    {
         return $this->order;
     }
 
     /**
      * @return Order
      */
-    public function getOrder () {
+    public function getOrder()
+    {
         return Order::load($this, $this->order->getId());
     }
 
     /**
      * @return RefundItem
      */
-    public function newItem () {
+    public function newItem()
+    {
         return $this->api->factory($this, RefundItem::class);
     }
 
     /**
      * @return Transaction
      */
-    public function newTransaction () {
+    public function newTransaction()
+    {
         return $this->api->factory($this, Transaction::class, [
             'kind' => Transaction::KIND_REFUND
         ]);
@@ -97,7 +103,8 @@ class Refund extends AbstractEntity implements ImmutableInterface {
      * @depends create-only
      * @return $this
      */
-    public function setFullShipping () {
+    public function setFullShipping()
+    {
         return $this->_set('shipping', ['full_refund' => true]);
     }
 
@@ -106,7 +113,8 @@ class Refund extends AbstractEntity implements ImmutableInterface {
      * @param string $amount
      * @return $this
      */
-    public function setShippingAmount (string $amount) {
+    public function setShippingAmount(string $amount)
+    {
         return $this->_set('shipping', ['amount' => $amount]);
     }
 }

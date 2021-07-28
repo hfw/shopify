@@ -18,6 +18,7 @@ use Helix\Shopify\Base\Data;
  * @method string   getSrc          ()
  * @method $this    setSrc          (string $src)
  */
-class Image extends Data {
+class Image extends Data
+{
 
 }

@@ -59,7 +59,8 @@ use Helix\Shopify\Customer\Invite;
  *
  * @method Address[]    selectAddresses (callable $filter) `fn( Address $address ): bool`
  */
-class Customer extends AbstractEntity {
+class Customer extends AbstractEntity
+{
 
     use CrudTrait;
     use MetafieldTrait;
@@ -96,7 +97,8 @@ class Customer extends AbstractEntity {
      */
     protected $activationUrl;
 
-    protected function _setData (array $data) {
+    protected function _setData(array $data)
+    {
         // redundant
         unset($data['default_address']);
 
@@ -106,7 +108,8 @@ class Customer extends AbstractEntity {
     /**
      * @return string
      */
-    public function getActivationUrl (): string {
+    public function getActivationUrl(): string
+    {
         assert($this->hasId());
         return $this->activationUrl
             ?? $this->activationUrl = $this->api->post("{$this}/account_activation_url")['account_activation_url'];
@@ -115,8 +118,9 @@ class Customer extends AbstractEntity {
     /**
      * @return null|Address
      */
-    public function getDefaultAddress () {
-        return $this->selectAddresses(function(Address $address) {
+    public function getDefaultAddress()
+    {
+        return $this->selectAddresses(function (Address $address) {
                 return $address->isDefault();
             })[0] ?? null;
     }
@@ -124,7 +128,8 @@ class Customer extends AbstractEntity {
     /**
      * @return Order[]
      */
-    public function getOrders () {
+    public function getOrders()
+    {
         assert($this->hasId());
         return Order::loadAll($this, "{$this}/orders");
     }
@@ -132,7 +137,8 @@ class Customer extends AbstractEntity {
     /**
      * @return string[]
      */
-    public function getPoolKeys () {
+    public function getPoolKeys()
+    {
         $keys = parent::getPoolKeys();
         $keys[] = $this->data['email'] ?? null;
         $keys[] = $this->data['phone'] ?? null;
@@ -143,35 +149,40 @@ class Customer extends AbstractEntity {
     /**
      * @return bool
      */
-    final public function isDeclined (): bool {
+    final public function isDeclined(): bool
+    {
         return $this->data['state'] === self::IS_DECLINED;
     }
 
     /**
      * @return bool
      */
-    final public function isDisabled (): bool {
+    final public function isDisabled(): bool
+    {
         return $this->data['state'] === self::IS_DISABLED;
     }
 
     /**
      * @return bool
      */
-    final public function isEnabled (): bool {
+    final public function isEnabled(): bool
+    {
         return $this->data['state'] === self::IS_ENABLED;
     }
 
     /**
      * @return bool
      */
-    final public function isInvited (): bool {
+    final public function isInvited(): bool
+    {
         return $this->data['state'] === self::IS_INVITED;
     }
 
     /**
      * @return Address
      */
-    public function newAddress () {
+    public function newAddress()
+    {
         return $this->api->factory($this, Address::class, [
             'customer_id' => $this->getId()
         ]);
@@ -182,7 +193,8 @@ class Customer extends AbstractEntity {
      *
      * @return Invite
      */
-    public function newInvite () {
+    public function newInvite()
+    {
         return new Invite($this);
     }
 
@@ -190,7 +202,8 @@ class Customer extends AbstractEntity {
      * @param string $password
      * @return $this
      */
-    public function setPassword (string $password) {
+    public function setPassword(string $password)
+    {
         $this->_set('password', $password);
         $this->_set('password_confirmation', $password);
         return $this;

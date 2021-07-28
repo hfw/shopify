@@ -31,7 +31,8 @@ use Helix\Shopify\Order;
  * @method string   getTitle                        ()
  * @method $this    setTitle                        (string $title)
  */
-class Shipping extends Data {
+class Shipping extends Data
+{
 
     const MAP = [
         'discounted_price_set' => Funds::class,

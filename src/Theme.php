@@ -25,7 +25,8 @@ use Helix\Shopify\Theme\Asset;
  * @method $this setName (string $name)
  * @method $this setRole (string $role)
  */
-class Theme extends AbstractEntity {
+class Theme extends AbstractEntity
+{
 
     use CrudTrait;
 
@@ -39,14 +40,16 @@ class Theme extends AbstractEntity {
     /**
      * @return Asset[]
      */
-    public function getAssets () {
+    public function getAssets()
+    {
         return Asset::loadAll($this, "{$this}/assets");
     }
 
     /**
      * @return Asset
      */
-    public function newAsset () {
+    public function newAsset()
+    {
         return $this->api->factory($this, Asset::class, [
             'theme_id' => $this->getId()
         ]);

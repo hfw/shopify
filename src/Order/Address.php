@@ -39,6 +39,7 @@ use Helix\Shopify\Order;
  * @method $this    setProvince     (string $province)
  * @method $this    setZip          (string $zip)
  */
-class Address extends Data {
+class Address extends Data
+{
 
 }

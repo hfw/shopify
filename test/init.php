@@ -1,7 +1,7 @@
 <?php
 
 error_reporting(E_ALL);
-set_error_handler(function(int $code, string $message, string $file, int $line, $ctx) {
+set_error_handler(function (int $code, string $message, string $file, int $line, $ctx) {
     echo "BEGIN ERROR CONTEXT\n\n";
     var_dump($ctx);
     echo "\nEND ERROR CONTEXT\n\n";
@@ -27,6 +27,6 @@ $key = getenv('SHOPIFY_API_KEY');
 $password = getenv('SHOPIFY_API_PASSWORD');
 
 $api = new Api($domain, $key, $password);
-$api->setLogger(function(string $event, string $path, ?string $payload) {
+$api->setLogger(function (string $event, string $path, ?string $payload) {
     echo "{$event} {$path} => {$payload}\n\n";
 });

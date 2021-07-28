@@ -47,7 +47,8 @@ use Helix\Shopify\Order\Tax;
  * @method string       getUpdatedAt            ()
  * @method string       getUserId               ()
  */
-class AbandonedCheckout extends Data {
+class AbandonedCheckout extends Data
+{
 
     const SEARCH_STATUS_CLOSED = 'closed';
     const SEARCH_STATUS_OPEN = 'open';
@@ -61,7 +62,8 @@ class AbandonedCheckout extends Data {
         'tax_lines' => [Tax::class]
     ];
 
-    protected function _setData (array $data) {
+    protected function _setData(array $data)
+    {
         // abandoned checkouts aren't entities.
         unset($data['id']);
 
@@ -74,7 +76,8 @@ class AbandonedCheckout extends Data {
     /**
      * @return Discount[]
      */
-    public function getDiscountCodes () {
+    public function getDiscountCodes()
+    {
         // the discounts are in an extra dimension for some reason.
         $discounts = array_column($this->data['discount_codes'], 'discount_code');
         return $this->api->factoryAll($this, Discount::class, $discounts);

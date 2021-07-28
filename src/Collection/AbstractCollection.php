@@ -32,7 +32,8 @@ use Helix\Shopify\SmartCollection;
  * @method $this        setTemplateSuffix   (string $suffix)
  * @method $this        setTitle            (string $title)
  */
-abstract class AbstractCollection extends AbstractEntity {
+abstract class AbstractCollection extends AbstractEntity
+{
 
     use CrudTrait;
     use MetafieldTrait;
@@ -57,12 +58,13 @@ abstract class AbstractCollection extends AbstractEntity {
      * @param Product $product
      * @return AbstractCollect
      */
-    abstract public function newCollect (Product $product);
+    abstract public function newCollect(Product $product);
 
     /**
      * @return Product[]
      */
-    public function getProducts () {
+    public function getProducts()
+    {
         return Product::loadAll($this, "collections/{$this->getId()}/products");
     }
 }

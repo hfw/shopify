@@ -22,7 +22,8 @@ use Helix\Shopify\Order;
  * @method number   getValue            ()
  * @method string   getValueType        ()
  */
-class AppliedDiscount extends Data {
+class AppliedDiscount extends Data
+{
 
     const ALLOCATE_ACROSS = 'across';
     const ALLOCATE_EACH = 'each';

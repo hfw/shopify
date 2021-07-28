@@ -68,7 +68,8 @@ use Helix\Shopify\Order;
  * @method $this setVariantTitle        (string $title)
  * @method $this setVendor              (string $vendor)
  */
-class OrderItem extends Data {
+class OrderItem extends Data
+{
 
     const MAP = [
         'discount_allocations' => [DiscountAllocation::class],

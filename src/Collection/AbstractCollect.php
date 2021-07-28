@@ -22,7 +22,8 @@ use Helix\Shopify\Product;
  * @method string   getSortValue    ()
  * @method string   getUpdatedAt    ()
  */
-abstract class AbstractCollect extends AbstractEntity implements ImmutableInterface {
+abstract class AbstractCollect extends AbstractEntity implements ImmutableInterface
+{
 
     use CreateTrait;
     use DeleteTrait;
@@ -33,12 +34,13 @@ abstract class AbstractCollect extends AbstractEntity implements ImmutableInterf
     /**
      * @return AbstractCollection
      */
-    abstract public function getCollection ();
+    abstract public function getCollection();
 
     /**
      * @return Product
      */
-    public function getProduct () {
+    public function getProduct()
+    {
         return Product::load($this, $this->getProductId());
     }
 }

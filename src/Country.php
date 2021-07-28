@@ -18,7 +18,8 @@ use Helix\Shopify\Country\Province;
  *
  * @method $this        setTax          (number $rate)
  */
-class Country extends AbstractEntity {
+class Country extends AbstractEntity
+{
 
     use CrudTrait;
 

@@ -16,12 +16,14 @@ use Helix\Shopify\Product;
  * @method $this setPosition (int $position) @depends create-only, the custom collection must be set to sort manually.
  * @method $this setSortValue (int $value) @depends create-only, the custom collection must be set to sort manually.
  */
-class CustomCollect extends AbstractCollect {
+class CustomCollect extends AbstractCollect
+{
 
     /**
      * @return CustomCollection
      */
-    public function getCollection () {
+    public function getCollection()
+    {
         return CustomCollection::load($this, $this->getCollectionId());
     }
 

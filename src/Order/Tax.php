@@ -15,7 +15,8 @@ use Helix\Shopify\Base\Data;
  * @method string   getTitle    ()
  * @method $this    setTitle    (string $title)
  */
-class Tax extends Data {
+class Tax extends Data
+{
 
     const MAP = [
         'price_set' => Funds::class

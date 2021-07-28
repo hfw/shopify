@@ -8,6 +8,7 @@ namespace Helix\Shopify\Base;
  * @method number getAmount         ()
  * @method string getCurrencyCode   ()
  */
-class Money extends Data {
+class Money extends Data
+{
 
 }

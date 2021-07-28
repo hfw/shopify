@@ -18,7 +18,8 @@ use Helix\Shopify\Order;
  * @method $this setCode    (string $code)
  * @method $this setType    (string $type)
  */
-class Discount extends Data {
+class Discount extends Data
+{
 
     const TYPE_FIXED_AMOUNT = 'fixed_amount';
     const TYPE_PERCENTAGE = 'percentage';

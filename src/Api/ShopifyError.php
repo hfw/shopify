@@ -11,7 +11,8 @@ use RuntimeException;
  *
  * The API class returns `null` for `404`; it's never thrown.
  */
-class ShopifyError extends RuntimeException {
+class ShopifyError extends RuntimeException
+{
 
     /**
      * Messages for codes with garbage response bodies.
@@ -40,7 +41,8 @@ class ShopifyError extends RuntimeException {
      * @param string $message
      * @param array $curlInfo
      */
-    public function __construct (int $code, string $message, array $curlInfo) {
+    public function __construct(int $code, string $message, array $curlInfo)
+    {
         parent::__construct(self::NO_DATA[$code] ?? $message, $code);
         $this->curlInfo = $curlInfo;
     }
@@ -48,14 +50,16 @@ class ShopifyError extends RuntimeException {
     /**
      * @return array
      */
-    public function getCurlInfo (): array {
+    public function getCurlInfo(): array
+    {
         return $this->curlInfo;
     }
 
     /**
      * @return bool
      */
-    final public function isCurl (): bool {
+    final public function isCurl(): bool
+    {
         return $this->code < 400;
     }
 }

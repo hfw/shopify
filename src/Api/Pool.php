@@ -7,7 +7,8 @@ use Helix\Shopify\Api;
 use Helix\Shopify\Base\AbstractEntity;
 use Helix\Shopify\Base\Data;
 
-class Pool {
+class Pool
+{
 
     /**
      * @var AbstractEntity[]
@@ -19,7 +20,8 @@ class Pool {
      */
     protected $ids = [];
 
-    protected function _add (AbstractEntity $entity): void {
+    protected function _add(AbstractEntity $entity): void
+    {
         assert($entity->hasId());
         $this->entities[$entity->getId()] = $entity;
     }
@@ -28,7 +30,8 @@ class Pool {
      * @param AbstractEntity $entity
      * @param string[] $keys
      */
-    protected function _addKeys (AbstractEntity $entity, ...$keys): void {
+    protected function _addKeys(AbstractEntity $entity, ...$keys): void
+    {
         assert($entity->hasId());
         $this->ids += array_fill_keys($keys, $entity->getId());
     }
@@ -38,7 +41,8 @@ class Pool {
      * @param Api|Data $caller
      * @return null|AbstractEntity
      */
-    protected function _get (string $key, $caller) {
+    protected function _get(string $key, $caller)
+    {
         if (isset($this->ids[$key])) {
             return $this->entities[$this->ids[$key]];
         }
@@ -46,7 +50,8 @@ class Pool {
         return null;
     }
 
-    final public function add (AbstractEntity $entity): void {
+    final public function add(AbstractEntity $entity): void
+    {
         if ($entity->hasId() and !$entity->isDiff()) {
             $this->_add($entity);
             $this->_addKeys($entity, $entity->getPoolKeys());
@@ -59,7 +64,8 @@ class Pool {
      * @param Closure $factory `fn( $caller ): ?AbstractEntity`
      * @return null|AbstractEntity
      */
-    final public function get (string $key, $caller, Closure $factory) {
+    final public function get(string $key, $caller, Closure $factory)
+    {
         /** @var AbstractEntity $entity */
         if (!$entity = $this->_get($key, $caller) and $entity = $factory($caller)) {
             $id = $entity->getId();
@@ -82,14 +88,16 @@ class Pool {
      * @param string $key
      * @return bool
      */
-    public function has (string $key): bool {
+    public function has(string $key): bool
+    {
         return isset($this->ids[$key]);
     }
 
     /**
      * @param string[] $keys
      */
-    public function remove (...$keys): void {
+    public function remove(...$keys): void
+    {
         foreach ($keys as $key) {
             unset($this->entities[$key]);
             unset($this->ids[$key]);

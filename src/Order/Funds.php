@@ -11,7 +11,8 @@ use Helix\Shopify\Base\Money;
  * @method Money getShopMoney ()
  * @method Money getPresentmentMoney ()
  */
-class Funds extends Data {
+class Funds extends Data
+{
 
     const MAP = [
         'shop_money' => Money::class,

@@ -7,12 +7,14 @@ use Helix\Shopify\Base\AbstractEntity;
 /**
  * @mixin AbstractEntity
  */
-trait UpdateTrait {
+trait UpdateTrait
+{
 
     /**
      * @return $this
      */
-    public function update () {
+    public function update()
+    {
         assert($this->hasId());
         if ($this->isDiff()) {
             $remote = $this->api->put($this, [static::TYPE => $this->toDiff()]);

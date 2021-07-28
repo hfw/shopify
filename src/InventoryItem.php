@@ -33,7 +33,8 @@ use Helix\Shopify\InventoryItem\CHSCode;
  * @method $this        setSku                          (string $sku)
  * @method $this        setTracked                      (string $tracked)
  */
-class InventoryItem extends AbstractEntity {
+class InventoryItem extends AbstractEntity
+{
 
     use CreateTrait;
     use UpdateTrait;
@@ -50,7 +51,8 @@ class InventoryItem extends AbstractEntity {
      *
      * @return CHSCode
      */
-    public function newCHSCode () {
+    public function newCHSCode()
+    {
         return $this->api->factory($this, CHSCode::class);
     }
 

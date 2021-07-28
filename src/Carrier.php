@@ -24,7 +24,8 @@ use Helix\Shopify\Base\AbstractEntity\CrudTrait;
  * @method $this    setName                 (string $name)
  * @method $this    setServiceDiscovery     (bool $discovery)
  */
-class Carrier extends AbstractEntity {
+class Carrier extends AbstractEntity
+{
 
     use CrudTrait;
 

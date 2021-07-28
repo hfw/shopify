@@ -11,7 +11,8 @@ use Helix\Shopify\Base\Data;
  * @method Funds    getAmountSet                ()
  * @method int      getDiscountApplicationIndex ()
  */
-class DiscountAllocation extends Data {
+class DiscountAllocation extends Data
+{
 
     const MAP = [
         'amount_set' => Funds::class

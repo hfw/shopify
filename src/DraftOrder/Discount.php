@@ -24,7 +24,8 @@ use Helix\Shopify\DraftOrder;
  * @method $this    setValueType    (string $type)
  * @todo checked
  */
-class Discount extends Data {
+class Discount extends Data
+{
 
     const VALUE_TYPE_FIXED_AMOUNT = 'fixed_amount';
     const VALUE_TYPE_PERCENTAGE = 'percentage';

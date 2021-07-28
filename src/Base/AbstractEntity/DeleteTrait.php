@@ -7,9 +7,11 @@ use Helix\Shopify\Base\AbstractEntity;
 /**
  * @mixin AbstractEntity
  */
-trait DeleteTrait {
+trait DeleteTrait
+{
 
-    public function delete (): void {
+    public function delete(): void
+    {
         assert($this->hasId());
         $this->api->delete($this);
         $this->_onDelete();

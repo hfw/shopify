@@ -59,7 +59,8 @@ use Helix\Shopify\Product;
  *
  * @method Price[] selectPresentmentPrices (callable $filter) `fn( Price $price ): bool`
  */
-class Variant extends AbstractEntity {
+class Variant extends AbstractEntity
+{
 
     use CrudTrait;
     use MetafieldTrait;
@@ -76,18 +77,21 @@ class Variant extends AbstractEntity {
     const POLICY_CONTINUE = 'continue';
     const POLICY_DENY = 'deny';
 
-    protected function _container () {
+    protected function _container()
+    {
         return $this->getProduct();
     }
 
-    final protected function _metafieldType (): string {
+    final protected function _metafieldType(): string
+    {
         return 'product_variant';
     }
 
     /**
      * @return Product
      */
-    public function getProduct () {
+    public function getProduct()
+    {
         return Product::load($this, $this->getProductId());
     }
 

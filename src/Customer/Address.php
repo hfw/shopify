@@ -41,23 +41,27 @@ use Helix\Shopify\Customer;
  * @method $this    setProvince     (string $province)
  * @method $this    setZip          (string $zip)
  */
-class Address extends AbstractEntity {
+class Address extends AbstractEntity
+{
 
     use CrudTrait;
 
     const TYPE = 'customer_address';
     const DIR = 'addresses';
 
-    protected function _container () {
+    protected function _container()
+    {
         return $this->getCustomer();
     }
 
-    protected function _onDelete (): void {
+    protected function _onDelete(): void
+    {
         parent::_onDelete();
         $this->getCustomer()->_reload('addresses');
     }
 
-    protected function _onSave (): void {
+    protected function _onSave(): void
+    {
         parent::_onSave();
         $customer = $this->getCustomer();
         $customer->_reload('addresses');
@@ -69,7 +73,8 @@ class Address extends AbstractEntity {
     /**
      * @return Customer
      */
-    public function getCustomer () {
+    public function getCustomer()
+    {
         return Customer::load($this, $this->getCustomerId());
     }
 
@@ -78,7 +83,8 @@ class Address extends AbstractEntity {
      *
      * @return string
      */
-    final public function getState () {
+    final public function getState()
+    {
         return $this->getProvince();
     }
 
@@ -87,7 +93,8 @@ class Address extends AbstractEntity {
      *
      * @return string
      */
-    final public function getStateCode () {
+    final public function getStateCode()
+    {
         return $this->getProvinceCode();
     }
 
@@ -96,7 +103,8 @@ class Address extends AbstractEntity {
      *
      * @return $this
      */
-    public function setDefault () {
+    public function setDefault()
+    {
         assert($this->hasId());
         // tell the prior default address.
         if ($default = $this->getCustomer()->getDefaultAddress()) {
@@ -112,7 +120,8 @@ class Address extends AbstractEntity {
      * @param string $state
      * @return $this
      */
-    final public function setState (string $state) {
+    final public function setState(string $state)
+    {
         return $this->setProvince($state);
     }
 

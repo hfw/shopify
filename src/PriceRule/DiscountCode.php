@@ -19,21 +19,24 @@ use Helix\Shopify\PriceRule;
  *
  * @method $this    setCode         (string $code)
  */
-class DiscountCode extends AbstractEntity {
+class DiscountCode extends AbstractEntity
+{
 
     use CrudTrait;
 
     const TYPE = 'discount_code';
     const DIR = 'discount_codes';
 
-    protected function _container () {
+    protected function _container()
+    {
         return $this->getPriceRule();
     }
 
     /**
      * @return PriceRule
      */
-    public function getPriceRule () {
+    public function getPriceRule()
+    {
         return PriceRule::load($this, $this->getPriceRuleId());
     }
 }
