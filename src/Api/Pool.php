@@ -54,7 +54,7 @@ class Pool
     {
         if ($entity->hasId() and !$entity->isDiff()) {
             $this->_add($entity);
-            $this->_addKeys($entity, $entity->getPoolKeys());
+            $this->_addKeys($entity, ...$entity->getPoolKeys());
         }
     }
 

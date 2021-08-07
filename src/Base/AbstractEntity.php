@@ -86,12 +86,12 @@ abstract class AbstractEntity extends Data
      * @param string $field
      * @return mixed
      */
-    protected function _get(string $field)
+    protected function _get(string $field, $default = null)
     {
         if (!array_key_exists($field, $this->data) and $this->hasId()) {
             $this->_reload($field);
         }
-        return parent::_get($field);
+        return parent::_get($field, $default);
     }
 
     protected function _onDelete(): void

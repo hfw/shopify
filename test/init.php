@@ -21,12 +21,17 @@ set_error_handler(function (int $code, string $message, string $file, int $line,
 require_once '../vendor/autoload.php';
 
 use Helix\Shopify\Api;
+use Psr\Log\Test\TestLogger;
 
 $domain = getenv('SHOPIFY_API_DOMAIN');
 $key = getenv('SHOPIFY_API_KEY');
 $password = getenv('SHOPIFY_API_PASSWORD');
 
 $api = new Api($domain, $key, $password);
-$api->setLogger(function (string $event, string $path, ?string $payload) {
-    echo "{$event} {$path} => {$payload}\n\n";
+$api->setLogger(new class extends TestLogger {
+
+    public function log($level, $message, array $context = [])
+    {
+        echo "{$level}: {$message}\n";
+    }
 });
